@@ -1,4 +1,4 @@
-package com.matheushenrique.cursomc.dao;
+package com.matheushenrique.cursomc.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.matheushenrique.cursomc.domain.ItemPedido;
 
 @Repository
-public interface ItemPedidoDAO extends JpaRepository<ItemPedido, Integer> {
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer> {
 
 }

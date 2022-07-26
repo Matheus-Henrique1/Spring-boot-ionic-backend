@@ -1,10 +1,10 @@
-package com.matheushenrique.cursomc.dao;
+package com.matheushenrique.cursomc.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.matheushenrique.cursomc.domain.Cidade;
 
 @Repository
-public interface CidadeDAO extends JpaRepository<Cidade, Integer> {
+public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 
 }

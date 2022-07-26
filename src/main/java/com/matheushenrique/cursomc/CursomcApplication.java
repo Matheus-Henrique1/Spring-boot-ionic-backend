@@ -8,15 +8,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.matheushenrique.cursomc.dao.CategoriaDAO;
-import com.matheushenrique.cursomc.dao.CidadeDAO;
-import com.matheushenrique.cursomc.dao.ClienteDAO;
-import com.matheushenrique.cursomc.dao.EnderecoDAO;
-import com.matheushenrique.cursomc.dao.EstadoDAO;
-import com.matheushenrique.cursomc.dao.ItemPedidoDAO;
-import com.matheushenrique.cursomc.dao.PagamentoDAO;
-import com.matheushenrique.cursomc.dao.PedidoDAO;
-import com.matheushenrique.cursomc.dao.ProdutoDAO;
+import com.matheushenrique.cursomc.repositories.CategoriaRepository;
+import com.matheushenrique.cursomc.repositories.CidadeRepository;
+import com.matheushenrique.cursomc.repositories.ClienteRepository;
+import com.matheushenrique.cursomc.repositories.EnderecoRepository;
+import com.matheushenrique.cursomc.repositories.EstadoRepository;
+import com.matheushenrique.cursomc.repositories.ItemPedidoRepository;
+import com.matheushenrique.cursomc.repositories.PagamentoRepository;
+import com.matheushenrique.cursomc.repositories.PedidoRepository;
+import com.matheushenrique.cursomc.repositories.ProdutoRepository;
 import com.matheushenrique.cursomc.domain.Categoria;
 import com.matheushenrique.cursomc.domain.Cidade;
 import com.matheushenrique.cursomc.domain.Cliente;
@@ -35,31 +35,31 @@ import com.matheushenrique.cursomc.domain.enums.TipoCliente;
 public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
-	private CategoriaDAO categoriaDAO;
+	private CategoriaRepository categoriaRepository;
 	
 	@Autowired
-	private ProdutoDAO produtoDAO;
+	private ProdutoRepository produtoRepository;
 	
 	@Autowired
-	private EstadoDAO estadoDAO;
+	private EstadoRepository estadoRepository;
 	
 	@Autowired
-	private CidadeDAO cidadeDAO;
+	private CidadeRepository cidadeRepository;
 	
 	@Autowired
-	private ClienteDAO clienteDAO;
+	private ClienteRepository clienteRepository;
 	
 	@Autowired
-	private EnderecoDAO enderecoDAO;
+	private EnderecoRepository enderecoRepository;
 	
 	@Autowired
-	private PedidoDAO pedidoDAO;
+	private PedidoRepository pedidoRepository;
 	
 	@Autowired
-	private PagamentoDAO pagamentoDAO;
+	private PagamentoRepository pagamentoRepository;
 	
 	@Autowired
-	private ItemPedidoDAO itemPedidoDAO;
+	private ItemPedidoRepository itemPedidoRepository;
 	
 
 	public static void main(String[] args) {
@@ -81,8 +81,8 @@ public class CursomcApplication implements CommandLineRunner {
 		produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2));
 		produto3.getCategorias().addAll(Arrays.asList(categoria1));
 		
-		categoriaDAO.saveAll(Arrays.asList(categoria1, categoria2));
-		produtoDAO.saveAll(Arrays.asList(produto1, produto2, produto3));
+		categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
+		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
 		
 		
 		Estado estado1 = new Estado(null, "Minas Gerais");
@@ -94,8 +94,8 @@ public class CursomcApplication implements CommandLineRunner {
 		estado1.getCidades().addAll(Arrays.asList(cidade1));
 		estado2.getCidades().addAll(Arrays.asList(cidade2, cidade3));
 		
-		estadoDAO.saveAll(Arrays.asList(estado1, estado2));
-		cidadeDAO.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
+		estadoRepository.saveAll(Arrays.asList(estado1, estado2));
+		cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
 		
 		
 		Cliente cliente1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
@@ -106,8 +106,8 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		cliente1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
 		
-		clienteDAO.saveAll(Arrays.asList(cliente1));
-		enderecoDAO.saveAll(Arrays.asList(endereco1, endereco2));
+		clienteRepository.saveAll(Arrays.asList(cliente1));
+		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
 		
@@ -123,8 +123,8 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		cliente1.getPedidos().addAll(Arrays.asList(pedido1, pedido2));
 		
-		pedidoDAO.saveAll(Arrays.asList(pedido1, pedido2));
-		pagamentoDAO.saveAll(Arrays.asList(pagamento1, pagamento2));
+		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
+		pagamentoRepository.saveAll(Arrays.asList(pagamento1, pagamento2));
 		
 		ItemPedido itemPedido1 = new ItemPedido(pedido1, produto1, 0.00, 1, 2000.00);
 		ItemPedido itemPedido2 = new ItemPedido(pedido1, produto3, 0.00, 2, 80.00);
@@ -137,7 +137,7 @@ public class CursomcApplication implements CommandLineRunner {
 		produto2.getItens().addAll(Arrays.asList(itemPedido3));
 		produto3.getItens().addAll(Arrays.asList(itemPedido2));
 		
-		itemPedidoDAO.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3));
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3));
 		
 	}
 

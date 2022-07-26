@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.matheushenrique.cursomc.dao.CategoriaDAO;
+import com.matheushenrique.cursomc.repositories.CategoriaRepository;
 import com.matheushenrique.cursomc.domain.Categoria;
 import com.matheushenrique.cursomc.services.exceptions.DataIntegrityException;
 import com.matheushenrique.cursomc.services.exceptions.ObjectNotFoundException;
@@ -16,35 +16,35 @@ import com.matheushenrique.cursomc.services.exceptions.ObjectNotFoundException;
 public class CategoriaService {
 
 	@Autowired
-	private CategoriaDAO categoriaDAO;
+	private CategoriaRepository categoriaRepository;
 
 	public Categoria find(Integer id) {
-		Optional<Categoria> obj = categoriaDAO.findById(id);
+		Optional<Categoria> obj = categoriaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 
 	public Categoria insert(Categoria categoria) {
 		categoria.setId(null);
-		return categoriaDAO.save(categoria);
+		return categoriaRepository.save(categoria);
 	}
 
 	public Categoria update(Categoria categoria) {
 		find(categoria.getId());
-		return categoriaDAO.save(categoria);
+		return categoriaRepository.save(categoria);
 	}
 
 	public void delete(Integer id) {
 		find(id);
 		try {
-			categoriaDAO.deleteById(id);
+			categoriaRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos!");
 		}
 	}
 
 	public List<Categoria> findAll(){
-		return categoriaDAO.findAll();
+		return categoriaRepository.findAll();
 	}
 
 }
